@@ -33,7 +33,7 @@ PyObject* wrap_frechetDist(PyObject* self, PyObject* args)
         P[idx].x = x;
         P[idx].y = y;
         }
-        for (idx=0; idx<n; idx++) {
+    for (idx=0; idx<n; idx++) {
         item = PyList_GetItem(ql, idx);
         x = PyFloat_AsDouble(PyList_GetItem(item, 0));
         y = PyFloat_AsDouble(PyList_GetItem(item, 1));
