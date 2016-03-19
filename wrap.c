@@ -12,7 +12,7 @@ PyObject* wrap_frechetDist(PyObject* self, PyObject* args)
     PyObject *pl=NULL, *ql=NULL, *item=NULL;
 
     if (! PyArg_ParseTuple(args, "iiOO", &m, &n, &pl, &ql)) {
-        return NULL;
+        Py_RETURN_NONE;
         }
 
     if (!PyList_Check(pl)) {
