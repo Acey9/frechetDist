@@ -89,7 +89,7 @@ double frechetDist(int m, int n, point *p, point *q) {
         return dist;
         }
         
-  void main(int argc, char** argv) {
+void main(int argc, char** argv) {
         double dist;
         point p[2] = {{0,0}, {0,0}};
         p[0].x = 0;
