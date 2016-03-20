@@ -1,13 +1,11 @@
 #include <Python.h>
-
 #include "frechet.h"
 
-PyObject* wrap_frechetDist(PyObject* self, PyObject* args)
+PyObject* wrap_distance(PyObject* self, PyObject* args)
 {
     int n, m, idx;
-    double dist;
-    double x,y;
-    point *P = NULL, *Q=NULL;
+    double dist, x, y;
+    __point *P = NULL, *Q=NULL;
 
     PyObject *pl=NULL, *ql=NULL, *item=NULL;
 
@@ -23,8 +21,8 @@ PyObject* wrap_frechetDist(PyObject* self, PyObject* args)
         Py_RETURN_NONE;
         }
 
-    P=malloc(m*sizeof(point));
-    Q=malloc(n*sizeof(point));
+    P=malloc(m*sizeof(__point));
+    Q=malloc(n*sizeof(__point));
 
     for (idx=0; idx<m; idx++) {
         item = PyList_GetItem(pl, idx);
@@ -41,8 +39,7 @@ PyObject* wrap_frechetDist(PyObject* self, PyObject* args)
         Q[idx].y = y;
         }
 
-    dist = frechetDist(m, n, P, Q);
-    //printf("dist:%f\n", dist);
+    dist = distance(m, n, P, Q);
 
     Py_DECREF(pl);
     Py_DECREF(ql);
@@ -56,7 +53,7 @@ PyObject* wrap_frechetDist(PyObject* self, PyObject* args)
 
 static PyMethodDef frechetMethods[] =
 {
-    {"frechetDist", wrap_frechetDist, METH_VARARGS, "frechet distance."},
+    {"distance", wrap_distance, METH_VARARGS, "frechet distance."},
     {NULL, NULL, 0, NULL}
 };
 
