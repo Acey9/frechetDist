@@ -1,8 +1,3 @@
-#include<math.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <float.h>
-
 #include "frechet.h"
 
 void print(double **ca, int m, int n) {
@@ -15,8 +10,7 @@ void print(double **ca, int m, int n) {
             }
         }
 
-
-double euc_dist(point  pt1, point  pt2) {
+double euc_dist(__point  pt1, __point  pt2) {
         double ua, ub;
         ua = pt2.x - pt1.x;
         ub = pt2.y - pt1.y;
@@ -32,7 +26,8 @@ double min(double a, double b, double c) {
         m = a < b?a:b;
         return m < c?m:c;
         }
-double _c(double **ca, int i, int j, point *p, point *q) {
+        
+double _c(double **ca, int i, int j, __point *p, __point *q) {
         if (ca[i][j] > -1) {
             return ca[i][j];
             }
@@ -56,14 +51,13 @@ double _c(double **ca, int i, int j, point *p, point *q) {
                 );
             }
         else {
-            //TODO
             //inf
             ca[i][j] = DBL_MAX;
             }
         return ca[i][j];
         }
-
-double frechetDist(int m, int n, point *p, point *q) {
+    
+double distance(int m, int n, __point *p, __point *q) {
         int i,j;
         double dist;
         double **ca = NULL;
@@ -85,23 +79,6 @@ double frechetDist(int m, int n, point *p, point *q) {
         free(ca);
         ca = NULL;
 
-        //printf("frechetDist:%f\n", dist);
+        //printf("distance:%f\n", dist);
         return dist;
-        }
-        
-void main(int argc, char** argv) {
-        double dist;
-        point p[2] = {{0,0}, {0,0}};
-        p[0].x = 0;
-        p[0].y = 1;
-        p[1].x = 1;
-        p[1].y = 2;
-
-        point q[2] = {{0,0}, {0,0}};
-        q[0].x = 0;
-        q[0].y = 1;
-        q[1].x = 1;
-        q[1].y = 20;
-
-        dist = frechetDist(2, 2, p, q);
-        }
+        }    
