@@ -26,13 +26,26 @@ PyObject* wrap_distance(PyObject* self, PyObject* args)
 
     for (idx=0; idx<m; idx++) {
         item = PyList_GetItem(pl, idx);
+        if(!PyList_Check(item)) {
+            free(P);
+            free(Q);
+            P = Q = NULL;
+            Py_RETURN_NONE;
+            }
         x = PyFloat_AsDouble(PyList_GetItem(item, 0));
         y = PyFloat_AsDouble(PyList_GetItem(item, 1));
         P[idx].x = x;
         P[idx].y = y;
         }
+
     for (idx=0; idx<n; idx++) {
         item = PyList_GetItem(ql, idx);
+        if(!PyList_Check(item)) {
+            free(P);
+            free(Q);
+            P = Q = NULL;
+            Py_RETURN_NONE;
+            }
         x = PyFloat_AsDouble(PyList_GetItem(item, 0));
         y = PyFloat_AsDouble(PyList_GetItem(item, 1));
         Q[idx].x = x;
@@ -40,13 +53,10 @@ PyObject* wrap_distance(PyObject* self, PyObject* args)
         }
 
     dist = distance(m, n, P, Q);
-
-    Py_DECREF(pl);
-    Py_DECREF(ql);
-    Py_DECREF(P);
-    Py_DECREF(Q);
-    //pl = ql = NULL;
-    //P = Q = NULL;
+    
+    free(P);
+    free(Q);
+    P = Q = NULL;
 
     return Py_BuildValue("f", dist);
 }
