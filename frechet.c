@@ -26,7 +26,6 @@ double min(double a, double b, double c) {
         m = a < b?a:b;
         return m < c?m:c;
         }
-        
 double _c(double **ca, int i, int j, __point *p, __point *q) {
         if (ca[i][j] > -1) {
             return ca[i][j];
@@ -56,7 +55,7 @@ double _c(double **ca, int i, int j, __point *p, __point *q) {
             }
         return ca[i][j];
         }
-    
+
 double distance(int m, int n, __point *p, __point *q) {
         int i,j;
         double dist;
@@ -81,4 +80,4 @@ double distance(int m, int n, __point *p, __point *q) {
 
         //printf("distance:%f\n", dist);
         return dist;
-        }    
+        }
